@@ -1,0 +1,11 @@
+.main-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.table{
+    display: flex;
+    height: 656px;;
+    width: 656px;
+    flex-wrap: wrap;
+}
