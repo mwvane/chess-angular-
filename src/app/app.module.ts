@@ -5,16 +5,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TableComponent } from './table/table.component';
 import { SquareComponent } from './square/square.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FigureComponent } from './figure/figure.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TableComponent,
-    SquareComponent
+    SquareComponent,
+    FigureComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

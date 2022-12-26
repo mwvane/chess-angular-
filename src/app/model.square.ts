@@ -1,4 +1,9 @@
+import { Icon } from "@fortawesome/fontawesome-svg-core";
+import { FigureType } from "./figure-type";
+
 export interface Square{
-    color: string,
-    isComfortable: boolean,
+    indexes: Array<number>;
+    color: string;
+    isComfortable: boolean;
+    figure: FigureType
 }

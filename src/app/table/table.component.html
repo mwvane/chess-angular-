@@ -1,5 +1,5 @@
 <div class="main-container">
   <div class="table">
-    <app-square *ngFor="let square of squares" [square]="square"></app-square>
+    <app-square *ngFor="let square of squares" [square]="square" (click)="onClick(square)"></app-square>
   </div>
 </div>
