@@ -1,6 +1,6 @@
 <div class="main-container">
   <div [ngClass]="square.color">
-    <div [ngClass]="square.isComfortable? 'flag' : ''"></div>
+    <div [ngClass]="square.isHilighted? 'flag' : ''"></div>
     <div *ngIf="square.figure != 'none'">
       <app-figure [figureType]="square.figure"></app-figure>
     </div>

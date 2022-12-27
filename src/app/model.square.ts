@@ -4,6 +4,6 @@ import { FigureType } from "./figure-type";
 export interface Square{
     indexes: Array<number>;
     color: string;
-    isComfortable: boolean;
+    isHilighted: boolean;
     figure: FigureType
 }
