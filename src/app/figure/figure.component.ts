@@ -16,21 +16,21 @@ import { FigureType } from '../figure-type';
 })
 export class FigureComponent implements OnInit {
   ngOnInit(): void {
-    this.currentFigure = this.getFigure()
+    this.currentFigure = this.getFigure();
   }
-  currentFigure = faChessPawn
+  currentFigure = faChessPawn;
   knight = faChessKnight;
   rook = faChessRook;
   king = faChessKing;
   queen = faChessQueen;
   pawn = faChessPawn;
   bishop = faChessBishop;
-  @Input() figureType: FigureType
-  @Input() currentIndex: number
+  @Input() figureType: FigureType;
+  @Input() isActive: boolean;
   getFigure() {
     switch (this.figureType) {
       case FigureType.knight:
-        return this.knight  
+        return this.knight;
       case FigureType.king:
         return this.king;
       case FigureType.queen:

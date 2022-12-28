@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faL } from '@fortawesome/free-solid-svg-icons';
 import { FigureType } from '../figure-type';
 import { Square } from '../model.square';
 
@@ -36,13 +37,17 @@ export class TableComponent implements OnInit {
           color: (i + j) % 2 !== 0 ? 'red' : 'black',
           isHilighted: false,
           figure: FigureType.none,
+          isActive: false,
         });
       }
     }
   }
   unhilightAllFigures() {
     this.squares.forEach((squares) =>
-      squares.forEach((square) => (square.isHilighted = false))
+      squares.forEach((square) => {
+        square.isHilighted = false;
+        square.isActive = false;
+      })
     );
   }
 
@@ -57,10 +62,11 @@ export class TableComponent implements OnInit {
     if (square.figure !== FigureType.none) {
       this.currentSquare = square;
       this.unhilightAllFigures();
+      this.currentSquare.isActive = true;
     }
 
     const indexes = this.getHilightableSquaresIndexes(square);
-    if(indexes){
+    if (indexes) {
       for (const [x, y] of indexes) {
         if (x >= 0 && x <= 7 && y >= 0 && y <= 7) {
           if (this.squares[y][x].figure === FigureType.none) {

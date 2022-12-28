@@ -13,14 +13,10 @@ import { FigureComponent } from './figure/figure.component';
     AppComponent,
     TableComponent,
     SquareComponent,
-    FigureComponent
+    FigureComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FontAwesomeModule,
-  ],
+  imports: [BrowserModule, AppRoutingModule, FontAwesomeModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

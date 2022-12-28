@@ -1,7 +1,11 @@
 <div class="main-container">
   <div class="table">
     <div *ngFor="let item of squares">
-      <app-square *ngFor="let square of item" [square]="square" (click)="onClick(square)"></app-square>
+      <app-square
+        *ngFor="let square of item"
+        [square]="square"
+        (click)="onClick(square)"
+      ></app-square>
     </div>
   </div>
 </div>

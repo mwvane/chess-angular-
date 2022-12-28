@@ -1,4 +1,8 @@
-.figure{
-    font-size: 35px;
-    color: white;
-  }
+.figure {
+  font-size: 35px;
+  color: white;
+}
+.active {
+  font-size: 40px;
+  color: yellow;
+}
