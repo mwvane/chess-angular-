@@ -1,5 +1,7 @@
 <div class="main-container">
   <div class="table">
-    <app-square *ngFor="let square of squares" [square]="square" (click)="onClick(square)"></app-square>
+    <div *ngFor="let item of squares">
+      <app-square *ngFor="let square of item" [square]="square" (click)="onClick(square)"></app-square>
+    </div>
   </div>
 </div>

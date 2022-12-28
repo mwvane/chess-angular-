@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { faL } from '@fortawesome/free-solid-svg-icons';
 import { FigureType } from '../figure-type';
 import { Square } from '../model.square';
 
@@ -9,28 +8,31 @@ import { Square } from '../model.square';
   styleUrls: ['./table.component.css'],
 })
 export class TableComponent implements OnInit {
-  squares: Square[] = [];
+  squares: Square[][] = [];
   currentSquare = null;
   ngOnInit(): void {
     this.getSquares();
-    this.squares[62].figure = FigureType.knight;
-    this.squares[63].figure = FigureType.rook;
-    this.squares[61].figure = FigureType.bishop;
-    this.squares[60].figure = FigureType.king;
-    this.squares[59].figure = FigureType.queen;
-    this.squares[63].figure = FigureType.rook;
-    this.squares[58].figure = FigureType.bishop;
-    this.squares[56].figure = FigureType.rook;
-    this.squares[57].figure = FigureType.knight;
-    for (let i = 48; i < 56; i++) {
-      this.squares[i].figure = FigureType.pawn;
+    const figures = [
+      FigureType.rook,
+      FigureType.knight,
+      FigureType.bishop,
+      FigureType.queen,
+      FigureType.king,
+      FigureType.bishop,
+      FigureType.knight,
+      FigureType.rook,
+    ];
+    for (let i = 0; i < figures.length; i++) {
+      this.squares[i][7].figure = figures[i];
+      this.squares[i][6].figure = FigureType.pawn;
     }
   }
   private getSquares() {
     for (let i = 0; i < 8; i++) {
+      this.squares.push([]);
       for (let j = 0; j < 8; j++) {
-        this.squares.push({
-          indexes: [i, j],
+        this.squares[i].push({
+          indexes: [j, i],
           color: (i + j) % 2 !== 0 ? 'red' : 'black',
           isHilighted: false,
           figure: FigureType.none,
@@ -39,8 +41,11 @@ export class TableComponent implements OnInit {
     }
   }
   unhilightAllFigures() {
-    this.squares.map((square) => (square.isHilighted = false));
+    this.squares.forEach((squares) =>
+      squares.forEach((square) => (square.isHilighted = false))
+    );
   }
+
   onClick(square) {
     if (square.isHilighted && this.currentSquare.figure !== FigureType.none) {
       square.figure = this.currentSquare.figure;
@@ -55,22 +60,18 @@ export class TableComponent implements OnInit {
     }
 
     const indexes = this.getHilightableSquaresIndexes(square);
-    const [squareY, squareX] = square.indexes;
-
-    for (const [y, x] of indexes) {
-      const toHilightSquare = this.squares.find(
-        ({ indexes, figure }) =>
-          indexes[0] === y && indexes[1] === x && figure === FigureType.none
-      );
-      if (toHilightSquare) {
-        toHilightSquare.isHilighted = true;
+    if(indexes){
+      for (const [x, y] of indexes) {
+        if (x >= 0 && x <= 7 && y >= 0 && y <= 7) {
+          if (this.squares[y][x].figure === FigureType.none) {
+            this.squares[y][x].isHilighted = true;
+          }
+        }
       }
     }
   }
   existsFigure(indexes) {
-    const square = this.squares.find(
-      (item) => item.indexes[0] === indexes[0] && item.indexes[1] === indexes[1]
-    );
+    const square = this.squares[indexes[0]][indexes[1]];
     if (!square) {
       return false;
     }
@@ -88,7 +89,7 @@ export class TableComponent implements OnInit {
           currentX <= 7 &&
           currentY >= 0 &&
           currentY <= 7 &&
-          !this.existsFigure([currentY, currentX])
+          !this.existsFigure([currentX, currentY])
         ) {
           indexes.push([currentY, currentX]);
         } else {
@@ -129,10 +130,14 @@ export class TableComponent implements OnInit {
           item[1] + square.indexes[1],
         ]);
       case FigureType.pawn:
-        return [
-          [-1, 0],
-          [-2, 0],
-        ].map((item) => [
+        let indexes =
+          square.indexes[0] > 5
+            ? [
+                [-1, 0],
+                [-2, 0],
+              ]
+            : [[-1, 0]];
+        return indexes.map((item) => [
           item[0] + square.indexes[0],
           item[1] + square.indexes[1],
         ]);
